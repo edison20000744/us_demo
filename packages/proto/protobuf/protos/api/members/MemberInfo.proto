@@ -1,0 +1,13 @@
+
+syntax = "proto3";
+
+package ApiProtos.Members.MemberInfo;
+
+message MemberInfo {
+    int32 usId = 1; // usId(9碼數字)
+    int32 type = 2; // 登入種類
+    string nickname = 3; // 暱稱
+    string profilePhoto = 4; // 頭像
+    string mobile = 5; // 手機號碼
+    string email = 6; // email
+}

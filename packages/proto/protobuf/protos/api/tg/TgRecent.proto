@@ -1,0 +1,34 @@
+
+syntax = "proto3";
+
+package ApiProtos.Tg.TgRecent;
+
+message TgRecent {
+
+    message match {
+        int32 matchId = 1; // 賽事id
+        int32 status = 2; // 賽是狀態
+        int32 tgStatus = 3; // tg賽事狀態是否開啟 0未開啟 1開啟
+        int32 homeId = 4; // 主隊id
+        int32 awayId = 5; // 客隊id
+        string home = 6; // 主隊名稱
+        string homeShortName = 7; // 主隊簡稱
+        string away = 8; // 客隊名稱
+        string awayShortName = 9; // 客隊簡稱
+        string homeLogo = 10; // 主隊Logo
+        string awayLogo = 11; // 客隊Logo
+        int32 leagueId = 12; // 聯盟id
+        string league = 13; // 聯盟名稱
+        string leagueShortNameEn = 14; // 聯盟簡稱(英文)
+        string leagueLogo = 15; // 聯盟Logo
+        int32 openDate = 16; // 開賽時間(timestamp)
+        int32 betsCount = 17; // 總下注量
+        int32 neutral = 18; // 是否為中立場
+        string maxScore = 19; // 最大出現率名稱
+        string maxValue = 20; // 最小出現率名稱
+        string minScore = 21; // 最大出現率%
+        string minValue = 22; // 最小出現率%
+    }
+
+    repeated match payload = 1; // 賽事資訊 api payload(陣列)
+}

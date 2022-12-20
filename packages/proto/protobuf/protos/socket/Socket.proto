@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package socketProtos.command;
+enum Command //枚举消息类型
+    {
+        system = 0; //系統訊息請忽略
+        systemMaintain = 1999; //系統維護強制斷線
+
+        subscribeResult = 1001; //訂閱結果
+        subscribeTgRecentMatches = 1002; //訂閱TG賽事更新資訊
+        subscribeMatchDetail = 1003; //訂閱賽事詳情
+        subscribeMatchTgOdds = 1004; //訂閱TG交易市場資訊(api->tg_odds)
+
+        loginFailed = 4001; //登入失敗 or 沒有權限
+        repeatLogin = 4002; //重複登入
+        parameterError = 4444; //參數錯誤
+
+        // notification = 1001; //訊統通知
+        // followUpdate = 1002; //賽事訂閱通知
+
+        tgMatchUpdate = 2001; //TG賽事資訊變動
+        tgRecentMatches = 2002; //TG近期賽事資訊
+        tgOddsUpdate = 2003; //TG市場資訊變動
+
+        matchUpdate = 3001; //賽事變動通知
+        goalNotify = 3002; //進球通知
+        newMatches = 3003; //新賽事資訊通知
+        openDateChange = 3004; //賽事開賽時間變動通知
+        deleteMatches = 3005; //賽事刪除通知
+        matchDetail = 3006; //賽事詳情通知
+        matchLineup = 3007; //賽事陣容通知
+        indexUpdate = 3008; // 指數變動通知
+        popularMatches = 3009; //推薦賽事變動通知
+    }

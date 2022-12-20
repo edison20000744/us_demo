@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package ApiProtos.System.Version;
+
+message Version {
+   message VersionContent {
+        int32 curVersionCode = 1; // 當前版本code
+        string curVersionName = 2; // 當前版本名稱
+        string description = 3; // 版本說明
+        int32 forcibly = 4; // 是否強制更新
+        string downloadQRcode = 5; // 下載QRcode
+        string downloadUrl = 6; // 下載連結
+        string officialDownloadQRcode = 7; // 官方下載QRcode
+        string officialDownloadUrl = 8; // 官方下載連結
+    }
+
+     VersionContent android = 1; //安卓
+     VersionContent ios = 2; //ios
+}
+

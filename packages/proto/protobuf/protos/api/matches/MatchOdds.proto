@@ -1,0 +1,42 @@
+
+syntax = "proto3";
+
+package ApiProtos.Matches.MatchOdds;
+
+message MatchOdds {
+
+     message Index {
+        string home = 1; // 主胜
+        string handicap = 2; // 盤口(和)
+        string away = 3; // 客胜
+    }
+
+    message Odd {
+        int32 companyID = 1; // 公司id
+        string companyName = 2; // 公司名稱
+        Index first = 3; // 初盤
+        Index latest = 4; //即時盤
+        Index live = 5; //滾球盤
+        int32 closed = 6; // 是否封盤
+    }
+
+    message Odds {
+        Odd asia = 1; // 亞盤
+        Odd eu = 2; // 歐盤
+        Odd bs = 3; // 大小球
+        Odd cr = 4; // 角球
+    }
+
+    message TgOdd {
+        string transaction = 1; // 可交易量
+        string profit = 2; // 獲利率
+        string betMoney = 3; // 累計金額
+        int32 isPopular = 4; // 是否熱銷 0否 1是
+        int32 isSoldOut = 5; // 是否售完 0否 1是
+        string selectionName = 6; // 0-0 0-1 0-2 0-3 1-0 1-1 1-2 1-3 2-0 2-1 2-2 2-3 3-0 3-1 3-2 3-3 homeFourOrMore awayFourOrMore 盤口資訊
+    }
+
+    Odds odds = 1; // 一般指數
+    repeated TgOdd tgOdds = 2; // TG指數
+
+}

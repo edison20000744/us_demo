@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package ApiProtos.Leagues.SeasonTables;
+
+message SeasonTables {
+
+    message Stage {
+        uint32 id = 1;//階段id
+        string name = 2;//階段名稱
+        int32 mode = 3;//階段模式 0=淘汰/1=積分
+        int32 groupCount = 4;//总分组数,0表示没有分组
+        int32 roundCount = 5;//总輪数,0表示没有輪次
+    }
+
+    message Rows {
+        uint32 id = 1;//隊伍id
+        int32 points = 2;//積分
+        int32 position = 3;//排名
+        int32 total = 4;//總場次
+        int32 won = 5;//獲勝次數
+        int32 draw = 6;//平手次數
+        int32 loss = 7;//輸球次數
+        int32 goals =8;//進球次數
+        int32 goalsAgainst =9;//失分次數
+        int32 goalDiff = 10;//淨勝球
+        int32 avgGoals = 11;//場均進球
+        int32 avgGoalsAgainst = 12;//場均失球
+        int32 avgGoalDiff = 13;//場均淨勝
+    }
+
+    message Data {
+        string group = 1;//分組名稱/若無分組為"0"
+        repeated Rows rows = 2;
+    }
+    
+    message Rank{
+        int32 stageId =1;//階段id
+        repeated Data data =2;//積分榜資料
+    }
+
+    message Team{
+        uint32 id =1;//隊伍id
+        string name =2;//隊伍名稱
+        string logo =3;//隊伍logo
+    }
+
+    int32 showSeasonId = 1; //當前顯示賽季id
+    repeated Stage stages =2;//賽事階段列表
+    repeated Rank rank=3;//積分榜資料
+    repeated Team teams=4;//隊伍列表
+}

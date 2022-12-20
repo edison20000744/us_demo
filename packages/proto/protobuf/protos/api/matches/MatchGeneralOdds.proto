@@ -1,0 +1,27 @@
+
+syntax = "proto3";
+
+package ApiProtos.Matches.MatchGeneralOdds;
+
+message MatchGeneralOdds {
+
+     message Index {
+        string home = 1; // 主胜
+        string handicap = 2; // 盤口
+        string away = 3; // 客胜
+    }
+
+    message Odd {
+        int32 companyID = 1; // 公司id
+        string companyName = 2; // 公司名稱
+        Index first = 3; // 初盤
+        Index live = 4; // 即時盤(含滾球)
+        int32 closed = 5; // 是否封盤 (0:否/1:是)
+    }
+
+    repeated Odd asia = 1; // 讓球盤
+    repeated Odd eu = 2; // 歐盤
+    repeated Odd bs = 3; // 大小球
+    repeated Odd cr = 4; // 角球
+    int32 timestamp = 5; // 更新時間 timestamp
+}

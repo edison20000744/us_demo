@@ -1,0 +1,18 @@
+
+syntax = "proto3";
+
+package ApiProtos.Popular.PopularLeagues;
+
+message PopularLeagues {
+
+    message League {
+        string areaName = 1; // 區域名稱
+        string countryName = 2; // 國家名稱
+        int32 LeagueId = 3; // 聯盟id
+        string LeagueName = 4; // 聯盟名稱
+        int32 seasonId = 5; // 賽季id
+        string logo = 6; // 聯盟Logo
+    }
+
+    repeated League payload = 1; // 聯盟資訊 api payload(陣列)
+}

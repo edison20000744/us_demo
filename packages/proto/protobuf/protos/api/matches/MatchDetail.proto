@@ -1,0 +1,151 @@
+
+syntax = "proto3";
+
+package ApiProtos.Matches.MatchDetail;
+
+import "protobuf/protos/socket/MatchInfo.proto";
+
+message MatchDetail {
+    message Stats {
+        int32 type = 1; // 技术统计分類;詳見技术统计類別碼
+        int32 home = 2; // 主隊分數
+        int32 away = 3; // 客隊分數
+    }
+
+    message Tlive {
+        string data = 1; // 文字直播內容
+        int32 position = 2; // 事件发生方,0-中立 1,主队 2,客队
+        int32 type = 3; // 狀態分類//类型，详见技术统计類別碼
+        string time = 4; // 進行時間
+    }
+
+    message PlayerIncident{
+        int32 type = 1; // 類型詳見狀態碼(足球技術統計)
+        string time = 2; // 時間（分鐘）
+        int32 assist1Id = 3; // 進球時，助攻球員1 id，-1則不須理會
+        int32 assist2Id = 4; // 進球時，助攻球員2 id，-1則不須理會
+        int32 inPlayerId = 5; // 換人時，換上球員id，-1則不須理會
+        int32 outPlayerId = 6; // 換人時，換下球員id，-1則不須理會
+        int32 homeScore = 7; //主隊比分
+        int32 awayScore = 8; //客隊比分
+    }
+
+    message LineupFormation {
+        int32 id = 1; // 球員id
+        int32 first = 2; // 是否首发，1-是 0-否
+        int32 shirtNumber = 3; // 球衣号 0表示未分配球衣或者无数据
+        string position = 4; // 球员位置,F前锋 M中锋 D后卫 G守门员,其他为未知
+        int32 x = 5; // 阵容x坐标 总共100
+        int32 y = 6; // 阵容y坐标 总共100
+        string rating = 7; // 阵容y坐标 总共100
+        repeated PlayerIncident incidents = 8; // 球員事件
+    }
+
+    message PlayerInfo {
+        int32 playerId = 1; // 球員ID
+        string name = 2; // 球員名稱
+        string shortName = 3; // 球員簡稱
+        string logo = 4; // 球員LOGO
+    }
+
+    message Lineup {
+        string homeManager = 1; // 主隊教練名稱
+        string awayManager = 2; // 客隊教練名稱
+        string homeFormation = 3; // 主隊陣型
+        string awayFormation = 4; // 客隊陣型
+        repeated LineupFormation home = 5; // 主隊陣容資訊
+        repeated LineupFormation away = 6; // 主隊陣容資訊
+        repeated PlayerInfo players = 7; // 球員列表
+    }
+
+    message BattleResult {
+        int32 win = 1; // 勝場數
+        int32 lost = 2; // 負場數
+        int32 tie = 3; // 和場數
+        int32 total = 4; // 總場數
+        int32 winRate = 5; // 勝率
+    }
+
+    message BattleRecord {
+        BattleResult home = 1; // 主隊歷史交鋒資訊
+        BattleResult away = 2; // 客隊歷史交鋒資訊
+    }
+
+    message MatchResult {
+        int32 matchId = 1; // 賽事ID
+        string result = 2; // 賽果 win勝/tie平/lost負
+    }
+
+    message MatchStatistics {
+        int32 win = 1; // 勝場數
+        int32 lost = 2; // 負場數
+        int32 tie = 3;  // 和場數
+        int32 total = 4; // 總場數
+        int32 winRate = 5; // 勝率
+        repeated MatchResult matches = 6; // 賽事資訊
+    }
+
+    message RecentMatches {
+        MatchStatistics home = 1; // 主隊近期對戰紀錄
+        MatchStatistics away = 2; // 客隊近期對戰紀錄
+    }
+
+    message MatchData {
+        int32 matchId = 1; // 賽事ID
+        int32 leagueId = 2; // 聯盟ID
+        string leagueName = 3; // 聯盟名稱
+        string leagueLogo = 4; // 聯盟LOGO
+        int32 homeId = 5; // 主隊ID
+        string homeName = 6; // 主隊名稱
+        string homeLogo = 7; // 主隊LOGO
+        int32 homeScore = 8; // 主隊比分
+        int32 awayId = 9; // 客隊ID
+        string awayName = 10; // 客隊名稱
+        string awayLogo = 11; // 客隊LOGO
+        int32 awayScore = 12; // 客隊比分
+        int32 openDate = 13; // 開賽時間(timestamp)
+        int32 status = 14; // 賽事狀態
+    }
+
+    message FutureMatches {
+        repeated MatchData leagueMatches = 1; // 聯盟未來賽事
+        repeated MatchData homeMatches = 2; // 主隊未來賽事
+        repeated MatchData awayMatches = 3; // 客隊未來賽事
+    }
+
+    int32 matchId = 1; // 賽事ID
+    string leagueName = 2; // 聯盟名稱(簡稱)
+    string venueName = 3; // 比賽場地
+    int32 round = 4; // 比賽輪次
+    int32 homeId = 5; // 主隊ID
+    string homeName = 6; // 主隊名稱
+    string homeLogo = 7; // 主隊Logo
+    int32 homeScore = 8; // 主隊全場比分
+    int32 homeHalfScore = 9; // 主隊半場比分
+    int32 homeExtend  = 10; // 主隊延長比分(已含常規比分)
+    int32 homePenalty  = 11; // 主隊點球大戰比分
+    string homeRank = 12; // 主隊排名
+    int32 awayId = 13; // 客隊ID
+    string awayName = 14; // 客隊名稱
+    string awayLogo = 15; // 客隊Logo
+    int32 awayScore = 16; // 客隊全場比分
+    int32 awayHalfScore = 17; // 客隊半場比分
+    int32 awayExtend  = 18; // 客隊延長比分(已含常規比分)
+    int32 awayPenalty  = 19; // 客隊點球大戰比分
+    string awayRank = 20; // 客隊排名
+    int32 openDate = 21; // 開賽時間(timestamp)
+    int32 status = 22; // 比賽狀態
+    int32 startTime = 23; // 開球時間(timestamp)
+    string animation = 24; // 動畫連結 沒有為""
+    repeated socketProtos.MatchInfo.LiveStreamProvider liveStreamings = 25; // 視頻連結
+    socketProtos.MatchInfo.MatchIncident incidents = 26; // 賽事重要事件
+    repeated Stats stats = 27; // 賽事統計
+    repeated Tlive tlive = 28; // 賽事文字直播
+    int32 views = 29; // 人氣數
+    int32 betsCount = 30; //下注次數
+    int32 neutral = 31; // 是否為中立場
+    Lineup lineup = 32; // 賽事陣容
+    BattleRecord battleRecord = 33; // 主客歷史交鋒
+    RecentMatches recentMatches = 34; // 主客近期最戰紀錄
+    FutureMatches futureMatches = 35; // 聯盟、主客近期未來賽事
+}

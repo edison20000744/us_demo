@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package ApiProtos.ChatRoom.chat;
+option go_package="apiProtos/chat";
+
+enum RoomStatusList
+{
+    None =0;//未尚開始
+    Start =1;//開放中
+    Close =8;//已結束
+}
+
+// /room/info/soccer
+message RoomInfoSoccerLive
+{
+    int32 matchId = 1; // 比賽ID
+    string roomId = 2;  // 聊天室ID
+    int32 roomType = 3; // 1:比賽直播
+    RoomStatusList roomStatus = 4; // 聊天室狀態
+}

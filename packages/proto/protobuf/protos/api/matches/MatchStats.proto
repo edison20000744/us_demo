@@ -1,0 +1,63 @@
+
+syntax = "proto3";
+
+package ApiProtos.Matches.MatchStats;
+
+import "protobuf/protos/socket/MatchInfo.proto";
+
+message MatchStats {
+
+    message Stats {
+        int32 type = 1; // 技术统计分類;詳見技术统计類別碼
+        int32 home = 2; // 主隊分數
+        int32 away = 3; // 客隊分數
+    }
+
+    message MatchResult {
+        int32 matchId = 1; // 賽事ID
+        string result = 2; // 賽果 win勝/tie平/lost負
+    }
+
+    message RecentMatch {
+        repeated MatchResult home = 1; // 主隊近期對戰資訊
+        repeated MatchResult away = 2; // 客隊近期對戰資訊
+    }
+
+    message MatchData {
+        int32 matchId = 1; // 賽事ID
+        int32 leagueId = 2; // 聯盟ID
+        string leagueName = 3; // 聯盟名稱
+        string leagueLogo = 4; // 聯盟LOGO
+        int32 homeId = 5; // 主隊ID
+        string homeName = 6; // 主隊名稱
+        string homeLogo = 7; // 主隊LOGO
+        int32 homeScore = 8; // 主隊比分
+        int32 awayId = 9; // 客隊ID
+        string awayName = 10; // 客隊名稱
+        string awayLogo = 11; // 客隊LOGO
+        int32 awayScore = 12; // 客隊比分
+        int32 openDate = 13; // 開賽時間(timestamp)
+        int32 status = 14; // 賽事狀態
+    }
+
+    message FutureMatch {
+        repeated MatchData leagueMatches = 1; // 聯盟未來賽事
+        repeated MatchData homeMatches = 2; // 主隊未來賽事
+        repeated MatchData awayMatches = 3; // 客隊未來賽事
+    }
+
+    int32 matchId = 1; // 賽事ID
+    int32 homeId = 2; // 主隊ID
+    int32 awayId = 3; // 客隊ID
+    string homeName = 4; // 主隊名稱
+    string homeLogo = 5; // 主隊LOGO
+    string homeRank = 6; // 主隊排名
+    string awayName = 7; // 客隊名稱
+    string awayLogo = 8; // 客隊LOGO
+    string awayRank = 9; // 客隊排名
+    int32 neutral = 10; // 是否為中立場
+    repeated Stats stats = 11; // 賽事統計資訊
+    socketProtos.MatchInfo.MatchIncident incidents = 12; // 賽事重要事件
+    RecentMatch recentMatches = 13; // 主客近期最戰紀錄
+    FutureMatch futureMatches = 14; // 聯盟、主客近期未來賽事
+}

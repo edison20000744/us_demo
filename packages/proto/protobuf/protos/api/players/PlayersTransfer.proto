@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package ApiProtos.Players.PlayersTransfer;
+
+message PlayersTransfer {
+
+    message Transfer {
+        uint32 outTeamId = 1;//轉出球隊
+        uint32 inTeamId = 2;//轉入球隊
+        string transferTime = 3;//轉會時間
+        string transferType = 4;//轉會種類
+        string transferFee = 5;//轉會金額(含貨幣單位)
+    }
+
+    message TeamInfo {
+        uint32 id =1;//球隊id
+        string name =2;//球隊名稱
+        string logo =3;//球隊logo
+    }
+
+
+    repeated Transfer transferHistory = 1;//球員轉會紀錄
+    repeated TeamInfo teams = 2;//球隊資訊
+}

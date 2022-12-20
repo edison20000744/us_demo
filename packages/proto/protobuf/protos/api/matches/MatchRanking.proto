@@ -1,0 +1,29 @@
+
+syntax = "proto3";
+
+package ApiProtos.Matches.MatchRanking;
+
+message MatchRanking {
+
+     message Statistics {
+        int32 position = 1; // 排名
+        int32 pts = 2; // 积分
+        int32 played = 3; // 赛事场数
+        int32 won = 4; // 胜场数
+        int32 drawn = 5; // 平场数
+        int32 lost = 6; // 负场数
+        int32 goals = 7; // 进球数
+        int32 against = 8; // 失球数
+        int32 diff = 9; // 净胜球数
+        double winRate = 10; // 勝率(%)
+    }
+
+    message Rank {
+        Statistics all = 1; // 全部
+        Statistics home = 2; // 主場
+        Statistics away = 3; // 客場
+    }
+
+    Rank home = 1; // 主隊積分資訊
+    Rank away = 2; // 客隊積分資訊
+}

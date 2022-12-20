@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package ApiProtos.Teams.TeamMatches;
+
+import "protobuf/protos/api/basic/BasicData.proto";
+import "protobuf/protos/api/basic/MatchesData.proto";
+
+message TeamMatches {
+
+    message Matches {
+        repeated ApiProtos.Basic.MatchesData.MatchesSchedule futureMatches = 1; //未來賽事資訊
+        repeated ApiProtos.Basic.MatchesData.MatchesSchedule pastMatches = 2; //過去賽事資訊
+        string nextUrl = 3;  //分頁連結
+        int32 totalPage = 4; //總頁數
+    }
+
+    Matches matches = 1; // 賽事資訊
+    repeated ApiProtos.Basic.BasicData.BasicInfo leagues = 2; // 聯盟資訊
+    repeated ApiProtos.Basic.BasicData.BasicInfo teams = 3; // 球隊資訊
+}

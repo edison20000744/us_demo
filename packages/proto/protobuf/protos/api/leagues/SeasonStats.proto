@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package ApiProtos.Leagues.SeasonStats;
+
+message SeasonStats {
+
+    message TeamRank {
+        int32 teamId = 1;//球隊id
+        int32 position = 2;//排名
+        int32 total = 3;//項目總數
+        string seasonName = 4;//賽季名稱
+    }
+
+    message BestTeamRank {
+        string name = 1;//榜單名稱
+        repeated TeamRank rank = 2;//排行
+    }
+
+    message PlayerRank {
+        int32 playerId = 1;//球員id
+        int32 teamId=2;//球隊id
+        int32 position = 3;//排名
+        int32 total = 4;//排名
+        string seasonName = 5;//賽季名稱
+    }
+    
+    message BestPlayerRank{
+        string name = 1;//榜單名稱
+        repeated PlayerRank rank = 2;//排行
+    }
+
+    message Team {
+        int32 id =1;//隊伍id
+        string name =2;//隊伍名稱
+        string logo =3;//隊伍logo
+    }
+
+    message Player {
+        int32 id =1;//球員id
+        string name =2;//球員名稱
+        string logo =3;//球員logo
+    }
+
+    repeated BestTeamRank bestTeamRank =1;//最佳球隊排行
+    repeated BestTeamRank bestTeamRankHistory =2;//歷年最佳球隊排行
+    repeated BestPlayerRank bestPlayerRank=3;//最佳球員排行
+    repeated BestPlayerRank bestPlayerRankHistory=4;//歷年最佳球員排行
+    repeated Team teams=5;//隊伍列表
+    repeated Player players=6;//球員列表
+}

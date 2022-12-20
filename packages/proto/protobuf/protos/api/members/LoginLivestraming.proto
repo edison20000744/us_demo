@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package ApiProtos.Members.Login;
+
+message LoginLivestraming {
+   string nickname = 3; // 會員暱稱
+   string token = 2; // 登入token
+}
+

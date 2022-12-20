@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package ApiProtos.News.NewsTop;
+
+message NewsTop {
+
+    message NewsData {
+        int32 id = 1;//新聞ID
+        string title = 2;//新聞標題
+        string time = 3;//發布時間
+        string imgSrc = 4;//新聞圖片
+    }
+    repeated NewsData payload = 1; //新聞熱門排行列表 api payload(陣列)
+}

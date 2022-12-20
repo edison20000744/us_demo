@@ -1,0 +1,40 @@
+{
+  "name": "@us/web",
+  "version": "2.1.32",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "@lottiefiles/lottie-player": "^1.5.7",
+    "@vueuse/core": "latest",
+    "@vvo/tzdb": "latest",
+    "chart.js": "^3.5.1",
+    "dayjs": "latest",
+    "default-passive-events": "^2.0.0",
+    "heatmap.js": "https://github.com/sanuradhag/heatmap.js.git",
+    "hls.js": "latest",
+    "mobile-device-detect": "^0.4.3",
+    "pinia": "latest",
+    "unicode-emoji": "^2.1.1",
+    "vue": "latest",
+    "vue-chart-3": "^0.5.7",
+    "vue-router": "next"
+  },
+  "devDependencies": {
+    "@types/heatmap.js": "latest",
+    "@types/hls.js": "latest",
+    "@vitejs/plugin-vue": "latest",
+    "@vue/compiler-sfc": "latest",
+    "flex-gap-polyfill": "latest",
+    "node-sass": "latest",
+    "rollup-plugin-visualizer": "latest",
+    "sass": "latest",
+    "sass-loader": "latest",
+    "vite": "latest",
+    "vite-plugin-pages": "latest",
+    "vite-plugin-vue-component-preview": "latest",
+    "vite-plugin-vue-layouts": "latest"
+  }
+}

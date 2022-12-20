@@ -1,0 +1,11 @@
+
+syntax = "proto3";
+
+package ApiProtos.Popular.PopularMatches;
+
+import "protobuf/protos/socket/MatchInfo.proto";
+
+message PopularMatches {
+
+    repeated socketProtos.MatchInfo.PopularMatches.PopularMatch payload = 1; // 賽事列表
+}

@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package ApiProtos.Players.PlayersDetail;
+
+import "protobuf/protos/api/basic/BasicData.proto";
+import "protobuf/protos/api/basic/MatchesData.proto";
+
+message PlayersDetail {
+
+    message Basic {
+        uint32 teamId = 1;//球隊id
+        string teamName = 2;//球隊名
+        string teamLogo = 3;//球隊logo
+        string contractExpired = 4;//合約到期日
+        string marketValue = 5;//球員市值
+        string nationality = 6;//國籍
+        string nationalityLogo = 7;//國籍LOGO
+        uint32 age = 8;
+        string birthday = 9;//出生年月日
+        uint32 height = 10;//身高
+        uint32 weight = 11;//體重
+        uint32 preferredFoot = 12;//慣用腳0 未知 1 左脚 2 右脚 3 左右脚
+        string position = 13;//擅长位置
+        uint32 shirtNumber = 14;//球衣号 0表示未分配球衣或者无数据
+    }
+
+    message Ability {
+        uint32 type = 1;//能力类型定义1 扑救 2 预判 3 处理球 4 空中 5 战术 6 进攻 7 防守 8 创造力 9 技术
+        uint32 score = 2;//评分
+        uint32 average = 3;//平均分
+    }
+
+    message ProsCons {
+        uint32 type = 1;//类型，技术特点类型
+        uint32 score = 2;//评分
+    }
+
+    message Characteristics {
+        repeated ProsCons pros = 1;//優勢
+        repeated ProsCons cons = 2;//劣勢
+    }
+
+    message Positions {
+        string main = 1;//位置列表 ，详细位置字段说明位置类型定义LW 左边锋 RW 右边锋 ST 前锋 AM 攻击型中场 ML 左中场 MC 中路中场 MR 右中场 DM 防守型中 DL 左后卫 DC 中后卫 DR 右后卫 GK 守门员
+        repeated string second = 2;//次要位置列表
+    }
+
+    message PositionsInfo {
+        string position = 1;//位置
+        int32 locationX = 2;//座標x
+        float locationXRate = 3;//座標x比率
+        int32 locationY = 4;//座標y
+        float locationYRate = 5;//座標y比率
+    }
+
+    message Capability {
+        repeated Ability ability = 1;//球員能力
+        Characteristics characteristics = 2;//優劣勢
+        Positions positions = 3;//主要、次要位置
+    }
+
+    message Matches {
+        repeated ApiProtos.Basic.MatchesData.MatchesSchedule pastMatches = 1; //過去賽事資訊
+        string nextUrl = 2;  //分頁連結
+        int32 totalPage = 3; //總頁數
+    }
+
+    string playerName = 1;//球員名(依照語言切換)
+    string playerNameEn = 2;//球員名(英文)
+    string playerLogo = 3;//球員Logo
+    Basic basic = 4;//基本資料
+    Capability capability = 5;//球員能力
+    repeated PositionsInfo positionsInfo = 6;//位置座標
+    Matches matches = 7; // 賽事資訊
+    repeated ApiProtos.Basic.BasicData.BasicInfo leagues = 8; // 聯盟資訊
+    repeated ApiProtos.Basic.BasicData.BasicInfo teams = 9; // 球隊資訊
+}

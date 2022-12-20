@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package ApiProtos.Players.PlayersHonor;
+
+message PlayersHonor {
+
+    message seasonInfo {
+        string seasonName = 1;//賽季名稱
+        string teamLogo = 2;//獲獎時球隊icon
+    }
+    message HonorItem {
+        string name = 1;//榮譽名稱
+        string logo = 2;//圖片
+        uint32 count =3;//獲得次數
+        repeated seasonInfo seasons = 4;//榮譽賽季
+    }
+
+    repeated HonorItem payload = 1; // 榮耀列表
+}

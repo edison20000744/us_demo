@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package ApiProtos.News.NewsList;
+
+message News {
+
+    message NewsData {
+        int32 id = 1;//新聞ID
+        string title = 2;//新聞標題
+        string time = 3;//發布時間
+        string imgSrc = 4;//新聞圖片
+        string briefDescription = 5;//內容簡述
+    }
+
+    int32 totalPage = 1;//總頁數
+    repeated NewsData data = 2;//新聞列表
+}

@@ -1,0 +1,54 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "incremental": true,
+    "strictNullChecks": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@us/web/*": [
+        "packages/web/src/*"
+      ],
+      "@us/web-mobile/*": [
+        "packages/web-mobile/src/*"
+      ],
+      "@us/web-tg/*": [
+        "packages/web-tg/src/*"
+      ],
+      "@us/proto/*": [
+        "packages/proto/src/*"
+      ],
+      "@us/locales/*": [
+        "packages/locales/src/*"
+      ],
+      "@us/*": [
+        "packages/*/src"
+      ],
+      "/*": [
+        "packages/web/*"
+      ],
+    },
+    "types": [
+      "vite/client",
+      "vite-plugin-pages/client",
+      "vite-plugin-vue-layouts/client",
+      "vite-plugin-vue-component-preview/client",
+    ],
+  },
+  "include": [
+    "packages/*/src",
+    "env.d.ts"
+  ],
+}

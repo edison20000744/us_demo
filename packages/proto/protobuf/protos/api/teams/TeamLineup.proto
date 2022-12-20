@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package ApiProtos.Teams.TeamLineup;
+
+message TeamLineup {
+
+    message Lineup {
+        uint32 shirtNumber = 1;//球衣號碼
+        string name = 2;//球員姓名
+        string marketValue = 3;//身價(含貨幣單位)
+        uint32 marketValueNumber = 4;//身價(純數字)
+        string position = 5;//位置
+        uint32 age = 6;//年齡
+        uint32 height = 7;//身高
+        uint32 weight = 8;//體重
+        string contractExpired = 9;//合約期限
+        string nationality = 10;//國籍
+        uint32 id = 11;//球員id
+    }
+
+    message Transfer {
+        uint32 id = 1;//球員id
+        string name = 2;//球員姓名
+        string transferFee = 3;//轉會金額(含貨幣單位)
+        uint32 transferFeeNumber = 4;//轉會金額(純數字)
+        string position = 5;//位置
+        uint32 age = 6;//年齡
+        uint32 height = 7;//身高
+        uint32 weight = 8;//體重
+        string transferTeamName = 9;//來自或前往的隊伍名稱
+        string nationality = 10;//國籍
+        string transferType = 11;//轉會種類
+        uint32 transferTime = 12;//轉會時間
+    }
+
+    repeated Lineup lineup = 1;//球隊陣容
+    repeated Transfer transferIn = 2;//轉入
+    repeated Transfer transferOut = 3;//轉出
+}

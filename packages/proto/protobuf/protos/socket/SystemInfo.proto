@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+import "protobuf/protos/socket/Socket.proto";
+package socketProtos.SystemInfo;
+
+message SystemMaintain  {
+    socketProtos.command.Command command = 1;
+    string eventTip = 2; // 維護結束時間
+}

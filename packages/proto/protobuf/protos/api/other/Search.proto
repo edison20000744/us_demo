@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package ApiProtos.Other.Search;
+
+message Search {
+   message League {
+        int32 id = 1; // 聯盟id
+        string name = 2; // 聯盟名稱
+        string logo = 3; // 聯盟logo
+        int32 countryId = 4; // 國家id
+        string countryName = 5; // 國家名稱
+        string countryLogo = 6; // 國家logo
+    }
+
+    message Team {
+        int32 id = 1; // 隊伍id
+        string name = 2; // 隊伍名稱
+        string logo = 3; // 隊伍logo
+        int32 leagueId = 4; // 聯盟id
+        string leagueName = 5; // 聯盟名稱
+        string leagueLogo = 6; // 聯盟logo
+    }
+
+    message Player {
+        int32 id = 1; // 球員id
+        string name = 2; // 球員名稱
+        string logo = 3; // 球員logo
+        string teamName = 4; // 隊伍名稱
+        string teamLogo = 5; // 隊伍logo
+        int32 teamId = 6; // 隊伍id
+        string position = 7; // 擅长位置 F-前锋 M-中场 D-后卫 G-守门员 ''-未知
+    }
+
+    message NewsData {
+        int32 id = 1;//新聞ID
+        string title = 2;//新聞標題
+        string time = 3;//發布時間
+        string imgSrc = 4;//新聞圖片
+        string briefDescription = 5;//內容簡述
+    }
+
+    repeated League leagues = 1; //聯盟列表
+    repeated Team teams = 2; //球隊列表
+    repeated Player players = 3; //球員列表
+    repeated NewsData news = 4;//新聞列表
+}
+

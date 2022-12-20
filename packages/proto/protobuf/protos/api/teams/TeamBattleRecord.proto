@@ -1,0 +1,61 @@
+
+syntax = "proto3";
+
+package ApiProtos.Teams.TeamBattleRecord;
+
+message TeamBattleRecord {
+
+   message Match {
+        int32 matchId = 1; // 比賽id
+        int32 leagueId = 2; // 聯盟ID
+        int32 openDate = 3; // 比賽時間
+        int32 homeId = 4; // 主隊ID
+        int32 awayId = 5; // 客隊ID
+        int32 homeScore = 6; // 主隊比分
+        int32 awayScore = 7; // 客隊比分
+        int32 homeHalfScore = 8; // 主隊半場比分
+        int32 awayHalfScore = 9; // 客隊半場比分
+        int32 homeCorner = 10; // 主隊角球數量
+        int32 awayCorner = 11; // 客隊角球數量
+        string bsHome = 12; // 大球賠率
+        string bsHandicap = 13; // 大小球盤口
+        string bsAway = 14; // 小球賠率
+        string bsResult = 15; // 大小球 大/小/走
+        string asiaHome = 16; // 讓球主勝賠率
+        string asiaHandicap = 17; // 讓球平手賠率
+        string asiaAway = 18; // 讓球客勝賠率
+        string asiaResult = 19; // 讓球結果 home(主勝)/away(客勝)/tie(平手)
+        string euHome = 20; // 歐賠主勝賠率
+        string euHandicap = 21; // 歐賠平手賠率
+        string euAway = 22; // 歐賠客勝賠率
+        string euResult = 23; // 歐賠結果 home(主勝)/away(客勝)/tie(平手)
+    }
+
+    message League {
+        int32 leagueId = 1; // 聯盟id
+        string name = 2; // 聯盟名稱
+        string shortName = 3; // 聯盟簡稱
+        string logo = 4; // logo
+    }
+
+    message Team {
+        int32 teamId = 1; // 球隊id
+        string name = 2; // 球隊名稱
+        string shortName = 3; // 球隊簡稱
+        string logo = 4; // logo
+    }
+
+    int32 win = 1; // 勝場數
+    int32 lost = 2; // 敗場數 
+    int32 tie = 3; // 和局數
+    int32 total = 4; // 總場數
+    int32 winRate = 5; // 勝率
+    int32 bigCount = 6; // 大球數量
+    int32 bigRate = 7; // 大球率
+    int32 smallCount = 8; // 小球數量
+    int32 smallRate = 9; // 小球率
+    repeated Match matches = 10; // 賽事資訊
+    repeated League leagues = 11; // 聯盟資訊
+    repeated Team teams = 12; // 聯盟資訊
+    int32 lastPage = 13; // 分頁 - 最後一頁頁數
+}

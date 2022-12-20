@@ -1,0 +1,42 @@
+
+syntax = "proto3";
+
+package ApiProtos.Matches.MatchKellyOdds;
+
+message MatchKellyOdds {
+
+    message Index {
+        string home = 1; // 主胜
+        string handicap = 2; // 和
+        string away = 3; // 客胜
+        string returnRate = 4; // 返還率
+        string homeRate = 5; // 主勝率
+        string handicapRate = 6; // 和率
+        string awayRate = 7; // 客勝率
+        string kellyFormulaHome = 8; // 凱利指數(主)
+        string kellyFormulaAway = 9; // 凱利指數(和)
+        string kellyFormulaHandicap = 10; // 凱利指數(客)
+    }
+
+    message Odd {
+        int32 companyID = 1; // 公司id
+        string companyName = 2; // 公司名稱
+        Index first = 3; // 初盤
+        Index latest = 4; // 即時盤
+    }
+
+    message StatsResult {
+        Index first = 1; //初盤
+        Index latest = 2; //即時盤
+    }
+
+    message Stats {
+        StatsResult max = 1; //最高值
+        StatsResult min = 2; //最小值
+        StatsResult avg = 3; //平均
+    }
+
+    repeated Odd data = 1; //盤口資訊
+    Stats stats = 2; // 盤口統計(最大、最小、平均)
+    
+}

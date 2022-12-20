@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package ApiProtos.Web.WebHomeInfo;
+
+message WebHomeInfo {
+    repeated Banner banners = 1; // banner資訊
+    repeated New news = 2; // 賽事列表
+}
+
+message Banner {
+    string title = 1; // edm title
+    int32 type = 2; // image=1, mp4=2, image & linkUrl = 3
+    string imgUrl = 3; // 圖片位置
+    string linkUrl = 4; // 連結位置
+}
+
+message New {
+    int32 id = 1; // 新聞ID
+    string title = 2; // 新聞標題
+    string imgSrc = 3; // 圖片位置
+    string time = 4; // 新聞發布時間
+}

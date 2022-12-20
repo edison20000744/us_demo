@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="52" height="24">
+    <defs>
+        <radialGradient id="a" cx=".311" cy=".396" r=".689" gradientTransform="matrix(1 0 0 1.118 0 -.047)" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#f5d8cb"/>
+            <stop offset=".576" stop-color="#f2ad8f"/>
+            <stop offset="1" stop-color="#e08d6a"/>
+        </radialGradient>
+        <filter id="b">
+            <feOffset/>
+            <feGaussianBlur stdDeviation="2" result="blur"/>
+            <feFlood flood-color="#4f559a" flood-opacity=".596" result="color"/>
+            <feComposite operator="out" in="SourceGraphic" in2="blur"/>
+            <feComposite operator="in" in="color"/>
+            <feComposite operator="in" in2="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g data-type="innerShadowGroup">
+        <path data-name="com_round_Num_active_bg" style="fill:url(#a)" d="M0 0h52v24H0z"/>
+        <g style="filter:url(#b)">
+            <path data-name="com_round_Num_active_bg" style="fill:#fff" d="M0 0h52v24H0z"/>
+        </g>
+    </g>
+</svg>

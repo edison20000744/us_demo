@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="76" height="32">
+    <defs>
+        <linearGradient id="a" x1=".5" x2=".5" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#cfd2ed"/>
+            <stop offset=".256" stop-color="#7d85c3"/>
+            <stop offset=".537" stop-color="#6971af"/>
+            <stop offset=".788" stop-color="#7d87c1"/>
+            <stop offset=".897" stop-color="#a2aee2"/>
+            <stop offset=".931" stop-color="#5c64a7"/>
+            <stop offset="1" stop-color="#989aa5"/>
+        </linearGradient>
+        <filter id="b" x="0" y="0" width="76" height="32" filterUnits="userSpaceOnUse">
+            <feOffset/>
+            <feGaussianBlur stdDeviation="1" result="blur"/>
+            <feFlood flood-color="#4f559a" result="color"/>
+            <feComposite operator="out" in="SourceGraphic" in2="blur"/>
+            <feComposite operator="in" in="color"/>
+            <feComposite operator="in" in2="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g data-type="innerShadowGroup">
+        <rect data-name="tab_item_PrimaryBg" width="76" height="32" rx="16" style="fill:url(#a)"/>
+        <g style="filter:url(#b)">
+            <rect data-name="tab_item_PrimaryBg" width="76" height="32" rx="16" style="fill:#fff"/>
+        </g>
+    </g>
+</svg>

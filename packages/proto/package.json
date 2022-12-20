@@ -1,0 +1,14 @@
+{
+    "name": "@us/proto",
+    "version": "0.0.0",
+    "main": "out/index.js",
+    "devDependencies": {
+        "@protobuf-ts/plugin": "latest",
+        "@protobuf-ts/protoc": "latest"
+    },
+    "scripts": {
+        "api": "protoc protobuf/protos/api/*/*.proto --proto_path . --ts_out src",
+        "socket": "protoc protobuf/protos/socket/*.proto --proto_path . --ts_out src",
+        "chat": "protoc protobuf/protos/chat.proto --proto_path . --ts_out src"
+    }
+}

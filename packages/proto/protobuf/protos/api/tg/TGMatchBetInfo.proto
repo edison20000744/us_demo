@@ -1,0 +1,18 @@
+
+syntax = "proto3";
+
+package ApiProtos.Tg.TGMatchBetInfo;
+
+message TGMatchBetInfo {
+
+     message BetInfo {
+        string transaction = 1; // 可交易量
+        string profit = 2; // 獲利率
+        string betMoney = 3; // 累計金額
+        int32 isPopular = 4; // 是否熱銷 0否 1是
+        int32 isSoldOut = 5; // 是否售完 0否 1是
+        string selectionName = 6; // 0-0 0-1 0-2 0-3 1-0 1-1 1-2 1-3 2-0 2-1 2-2 2-3 3-0 3-1 3-2 3-3 homeFourOrMore awayFourOrMore 選項名稱
+    }
+
+    repeated BetInfo payload = 1; // 各選項下注資訊 api payload(陣列)
+}

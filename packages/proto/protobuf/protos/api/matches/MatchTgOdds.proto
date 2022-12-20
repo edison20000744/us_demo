@@ -1,0 +1,23 @@
+
+syntax = "proto3";
+
+package ApiProtos.Matches.MatchTgOdds;
+
+message MatchTgOdds {
+
+     message Selections {
+        string selectionName = 1; // 選項名稱 0-0 0-1 0-2 0-3 1-0 1-1 1-2 1-3 2-0 2-1 2-2 2-3 3-0 3-1 3-2 3-3 homeFourOrMore(主队赢-進球四球以上) awayFourOrMore(客队赢-進球四球以上) tieFourOrMore(平手-進球四球以上) oneOrMore(1球以上) twoOrMore(2球以上) threeOrMore(3球以上) fourOrMore(4球以上) fiveOrMore(5球以上) sixOrMore(6球以上) sevenOrMore(7球以上) other(其他)
+        string odd = 2; // 獲利率
+        string transaction = 3; // 可交易量
+        string betMoney = 4; // 已交易量
+    }
+
+    message Market {
+        string name = 1; // 玩法名稱
+        repeated Selections selections = 2; // 選項資訊
+    }
+
+    Market correctScore = 1; // 全場波膽
+    Market halfTimeScore = 2; // 半場波膽
+    Market totalGoals = 3; // 總入球
+}

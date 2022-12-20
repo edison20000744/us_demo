@@ -1,0 +1,210 @@
+syntax = "proto3";
+
+package socketProtos.chat;
+option go_package="socketProtos/chat";
+enum Command //消息類型
+{
+    system = 0; //系統訊息請忽略 pong
+    pingCode = 9999; //ping請求 回 pong 0
+    parameterError = 4444; //參數錯誤
+    ConnectRequestCode  = 8101; //訂閱賽事房間
+    unSubcribeLiveRoomRequestCode  = 8111; //取消訂閱賽事房間 退出房間
+    PushMessageRequestCode            = 8201; //傳送訊息至房間(賽事、私訊)
+    HistoryMessageReplyCode     = 8102; //歷史聊天訊息
+    RoomInfoReplyCode       = 8103; //房間資訊及人數
+    RoomUserChangeReplyCode = 8300;//房間人員異動
+    NewMessageReplyCode  = 8100; //接收房間訊息
+    DelMessageReplyCode  = 8188; //刪除房間訊息
+    NewMessageErrorReplyCode  = 8104; //傳送訊息格式文字不符
+    BannedNoTalkingErrorReplyCode = 8143;//被禁止發言
+    CloseChatReplyCode = 8144;//聊天室已關閉
+    SearchHistoryMessageReuestCode     = 8212; //請求歷史訊息
+    OfflinePrivateMessageReplyCode     = 8113; //離線私聊訊息
+}
+
+//Connect 訂閱賽事房間 cmd:ConnectRequestCode
+message Connect 
+{
+    Command command = 1;
+    string roomId = 2; //聊天室房間唯一key
+}
+
+//unSubcribeLiveRoom 離開賽事房間 取消訂閱 
+message unSubcribeLiveRoom 
+{
+    Command command = 1;
+    string roomId = 2; //聊天室房間唯一key
+}
+
+//PushMessage 傳送賽事房間訊息 cmd:PushMessageRequestCode
+message PushMessage 
+{
+    Command command = 1;
+    string roomId = 2; //傳送訊息聊天室房間
+    string msg =3; //傳送訊息內容
+    MessageType msgType =4;//訊息類別
+    int32 hashUserId =5;//直播 @user
+}
+
+enum newMsgErrorType //發送訊息錯誤種類
+{
+    successMsg = 0; //系統預設
+    overLengthText = 8141; //超過字元長度
+    containsProhibitedText=8142;//含有禁止文字、特殊字元、網址等
+    bannedNoTalking = 8143;//被禁止發言
+    closeChat = 8144; //聊天室已關閉
+    sendRateTooOften = 8145; //發送訊息過於頻繁
+    insufficientPermissions = 8160; //使用者權限不足無法傳送訊息
+}
+
+//NewMessageReply 
+//接收房間最新訊息 cmd:NewMessageReplyCode
+message NewMessageReply
+{
+    Command command = 1;
+    string roomId = 2;//接收訊息聊天室房間id
+    Message message =3;
+    Room room = 4;
+}
+
+//DelMessageReply 
+//刪除房間訊息 cmd:DelMessageReplyCode
+message DelMessageReply
+{
+    Command command = 1;
+    string roomId = 2;//刪除訊息聊天室房間id
+    string msgId = 3;//訊息唯一key
+}
+
+
+//ErrorMessageReply
+//傳送訊息格式文字不符 cmd:NewMessageErrorReplyCode
+message ErrorMessageReply
+{
+    Command command = 1;
+    string roomId = 2;
+    Message message =3;//傳送的訊息
+    newMsgErrorType errorCode=4;//錯誤代碼
+    Room room = 5;
+}
+
+enum MessageType //訊息類別
+{
+    errMessage = 0; //不存在
+    text = 1; //純文字訊息
+    image =2; //貼圖
+    liveMatches =8;//私人訊息，賽事邀請
+    tgAdvertise = 9; //TG推廣
+}
+
+message Message
+{
+    string msgId = 1;//訊息唯一key
+    string msgText = 2;//訊息內容
+    UserInfo fromUser =3;//傳送訊息使用者
+    UserInfo toUser =4;//傳送訊息指定使用者
+    uint32 createTime=5; //訊息傳送時間
+    MessageType msgType =6;//訊息類別
+    TgAdvertise tgAdvertise =7;
+    LiveMatchesLink liveMatchLink=8;//直播賽事邀請
+}
+
+message TgAdvertise
+{
+    string text =1;//純文字
+    string hyperLinkText =2;//超連結文字
+    string hyperLink =3;//超連結網址
+}
+
+message LiveMatchesLink
+{
+    string matchText =1;//賽事對戰純文字
+    int32 matchId =2;//賽事id
+}
+
+//HistoryMessageReply   
+//賽事房間歷史訊息 cmd:HistoryMessageReplyCode
+//離線訊息推送 cmd:OfflinePrivateMessageReplyCode
+message HistoryMessageReply
+{
+    Command command = 1;
+    string roomId = 2;
+    repeated Message messages =3;
+    Room room = 4;
+}
+
+enum userType //使用者類別
+{
+    none = 0; //
+    fullMember = 1; //會員
+    guest = 5; //訪客
+}
+
+message UserInfo 
+{
+    int32 userId =1;
+    string userName =2;//帳號
+    userType userType =3;
+    string profilePic =4;
+    string nickName =5;//暱稱
+}
+
+
+//RoomInfoReply 房間人數及線上會員列表 cmd:RoomInfoReplyCode
+message RoomInfoReply  {
+    Command command = 1;
+    string roomId = 2;
+    int32 userCnt =3; //房間當前人數
+    repeated UserInfo onlineList =4; //當前在線會員列表
+    Room room = 5;
+}
+
+//RoomUserChangeReply 房間會員進出、人數更新 addUser,minusUser可同時為空 cmd:RoomUserChangeReplyCode
+message RoomUserChangeReply  {
+    Command command = 1;
+    string roomId = 2;
+    int32 userCnt =3; //房間當前人數
+    UserInfo addUser =4; //新進房間的會員
+    UserInfo minusUser =5; //離開房間的會員
+    int32 views = 6;//累計次數
+}
+
+
+//SearchRoomHistoryMessage 查詢房間歷史訊息 cmd:SearchHistoryMessageReuestCode
+message SearchRoomHistoryMessage {
+    Command command = 1;
+    string roomId =2;
+    string srhMsgId = 3;//訊息唯一key 當為空字串時 回傳最近50筆歷史訊息,有id時 以該id為起點前查詢50筆歷史訊息
+}
+
+message BannedSendMessage {
+    Command command = 1;
+    int32 banEndTime = 2;//=0時，表示永久禁言
+    int32 reasonType =3;//禁言原因代碼
+}
+
+message CloseChatMessage {
+    Command command = 1;
+    string roomId = 2;
+}
+
+enum roomType //房間類別
+{
+    errRoom = 0; //錯誤
+    soccerLive = 1; //賽事直播
+    privateRoom = 9; //私人1對1
+}
+
+enum RoomStatusList
+{
+    None =0;//尚未開始
+    Start =1;//開放中
+    Close =8;//已結束
+}
+
+message Room 
+{
+    string roomId = 1;//唯一key
+    roomType roomType =2;//種類
+    RoomStatusList roomStatus =3;//狀態
+}

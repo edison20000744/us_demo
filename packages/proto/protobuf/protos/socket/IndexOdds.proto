@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+import "protobuf/protos/socket/Socket.proto";
+
+package socketProtos.IndexOdds;
+
+message IndexUpdate{
+    socketProtos.command.Command command = 1;
+    repeated IndexInfo data = 2;
+}
+
+message IndexInfo {
+    int32 matchId = 1; // 賽事id
+    repeated Odds odds = 2; // 盤口資訊
+}
+
+message Odds {
+    string oddType = 1; // 盤口種類 asia亞盤 eu歐盤 bs大小球
+    bool status = 2; // 是否開賽
+    string home = 3; // 主勝
+    string handicap = 4; // 和、盤口
+    string away = 5; // 客勝
+    int32 timestamp = 6; // 變盤時間
+    bool closed = 7; // 是否封盤
+}

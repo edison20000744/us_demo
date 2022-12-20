@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package ApiProtos.Basic.MatchesData;
+
+message MatchData {
+    int32 id = 1; // 賽事ID
+    int32 homeId = 2; // 主隊ID
+    int32 awayId = 3; // 客隊ID
+    int32 startTime = 4; // 開球時間
+    int32 openDate = 5; // 開賽時間
+    int32 homeScore = 6; // 主隊比分
+    int32 awayScore = 7; // 客隊比分
+    int32 homeHalfScore = 8; // 主隊半場比分
+    int32 awayHalfScore = 9; // 客隊半場比分
+    int32 homeCorner = 10; // 主隊角球數量
+    int32 awayCorner = 11; // 客隊角球數量
+    int32 homePenalty = 12; // 主隊點求比分
+    int32 awayPenalty = 13; // 客隊點求比分
+    int32 homeExtend = 14; // 主隊延長賽比分
+    int32 awayExtend = 15; // 客隊延長賽比分
+    int32 status = 16; // 賽事狀態
+    string note = 17; // 備註
+    int32 neutral = 18; // 是否為中立場
+    string rating = 19; // 球員評分
+}
+
+message MatchesSchedule {
+    int32 leagueId = 1; // 聯盟ID
+    repeated MatchData matches = 2; //賽事資訊
+}

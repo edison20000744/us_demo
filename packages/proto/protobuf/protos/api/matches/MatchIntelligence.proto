@@ -1,0 +1,21 @@
+
+syntax = "proto3";
+
+package ApiProtos.Matches.MatchIntelligence;
+
+message MatchIntelligence {
+
+     message Intelligence {
+        int32 level = 1; // 情报重要程度(1-5)，数值越大越重要
+        string message = 2; // 情报内容
+    }
+
+    message Integration {
+        repeated Intelligence good = 1; // 有利情報
+        repeated Intelligence bad = 2; // 不利情報
+        repeated Intelligence neutral = 3; // 中立情報
+    }
+
+    Integration home = 1; // 主隊情報資訊
+    Integration away = 2; // 客隊情報資訊
+}

@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+package ApiProtos.Teams.TeamDetail;
+
+import "protobuf/protos/api/basic/BasicData.proto";
+import "protobuf/protos/api/basic/MatchesData.proto";
+
+message TeamDetail {
+
+    message Venue {
+        string name = 1; // 場館名稱
+        int32 capacity = 2; // 場館容量
+    }
+
+    message Honors {
+        string name = 1; // 榮耀名稱
+        string logo = 2; // 榮耀LOGO
+        int32 count = 3; // 榮耀數量
+        repeated string season = 4; // 獲得賽季
+    }
+
+    message Info {
+        int32 id = 1; // 隊伍ID
+        string name = 2; // 隊伍名稱
+        string logo = 3; // 隊伍LOGO
+        int32 areaId = 4; //區域ID
+        int32 countryId = 5; //國家ID 
+        string country = 6; // 隊伍國家
+        string countryLogo = 7; // 隊伍國家LOGO
+        string leagueId = 8; // 聯盟ID
+        string found = 9; // 隊伍成立日期
+        Venue venue = 10; // 隊伍場館資訊
+        string marketValue = 11; // 隊伍市值
+        string website = 12; // 隊伍官網
+        int32 participatePlayer = 13; // 餐數球員數量
+        repeated Honors honors = 14; // 榮耀資訊
+    }
+
+    message Table {
+        int32 leagueId = 1; // 聯盟ID
+        string stageName = 2; // 階段名稱
+        int32 position = 3; // 隊伍排名
+        int32 points = 4; // 隊伍積分
+        int32 won = 5; // 隊伍獲勝場數
+        int32 draw = 6; // 隊伍平局廠商
+        int32 loss = 7; // 隊伍敗場場數
+        string note = 8; // 備註
+    }
+
+    message ShooterRank {
+        int32 playerId = 1; // 球員ID
+        int32 position = 2; // 排名
+        int32 total = 3; // 總進球數
+    }
+
+    message MarketValueRank {
+        int32 playerId = 1; // 球員ID
+        int32 position = 2; // 排名
+        int32 total = 3; //市值(int)
+        string marketValue = 4; //市值(已轉換)
+    }
+
+    message Matches {
+        repeated ApiProtos.Basic.MatchesData.MatchesSchedule futureMatches = 1; //未來賽事資訊
+        repeated ApiProtos.Basic.MatchesData.MatchesSchedule pastMatches = 2; //過去賽事資訊
+        string nextUrl = 3;  //分頁連結
+        int32 totalPage = 4; //總頁數
+    }
+
+    message Season {
+        int32 seasonId = 1; // 賽事ID
+        int32 leagueId = 2; // 聯盟ID
+    }
+
+    message Seasons {
+        string name = 1; // 賽季名稱
+        repeated Season seasons = 2; // 賽季資訊
+    }
+
+    Info info = 1; // 基本資訊
+    repeated Table tables = 2; // 積分榜
+    repeated ShooterRank shooterRank = 3; // 射手榜
+    repeated MarketValueRank marketValueRank = 4; // 市值榜
+    Matches matches = 5; // 賽事資訊
+    repeated Seasons seasons = 6; // 賽季資訊
+    repeated ApiProtos.Basic.BasicData.BasicInfo leagues = 7; // 聯盟資訊
+    repeated ApiProtos.Basic.BasicData.BasicInfo teams = 8; // 球隊資訊
+    repeated ApiProtos.Basic.BasicData.BasicInfo players = 9; // 球員資訊
+}

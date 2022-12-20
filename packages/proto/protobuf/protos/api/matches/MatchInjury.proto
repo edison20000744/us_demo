@@ -1,0 +1,22 @@
+
+syntax = "proto3";
+
+package ApiProtos.Matches.MatchInjury;
+
+message MatchInjury {
+
+     message InjuryInfo {
+        uint32 id = 1; // 球员id
+        string name = 2; // 球员名称
+        string position = 3; // 球员位置，F-前锋、M-中场、D-后卫、G-守门员、其他为未知
+        string logo = 4; // 球员logo
+        string reason = 5; // 伤停原因
+        uint32 missedMatches = 6; // 影响场次
+        uint32 startTime = 7; // 开始时间
+        uint32 endTime = 8; // 结束时间
+        uint32 type = 9; // 类型，0-未知、1-受伤、2-停赛
+    }
+
+    repeated InjuryInfo home = 1; // 主隊傷停資訊
+    repeated InjuryInfo away = 2; // 客隊傷停資訊
+}

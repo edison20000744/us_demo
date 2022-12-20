@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package ApiProtos.Teams.TeamSeasonStats;
+
+message TeamSeasonStats {
+
+    message PlayerRank {
+        int32 playerId = 1;//球員id
+        int32 teamId=2;//球隊id
+        int32 position = 3;//排名
+        int32 total = 4;//排名
+        string seasonName = 5;//賽季名稱
+    }
+    
+    message BestPlayerRank{
+        string name = 1;//榜單名稱
+        repeated PlayerRank rank = 2;//排行
+    }
+
+
+    message Player {
+        int32 id =1;//球員id
+        string name =2;//球員名稱
+        string logo =3;//球員logo
+    }
+
+    repeated BestPlayerRank bestPlayerRank=1;//最佳球員排行
+    repeated BestPlayerRank bestPlayerRankHistory=2;//歷年最佳球員排行
+    repeated Player players=3;//球員列表
+}

@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package ApiProtos.Members.Login;
+
+message AuthRefresh {
+   string token = 1; // 登入token
+   string ip = 2; // ip位置
+   string countryCode = 3; // 國家代碼
+}
+

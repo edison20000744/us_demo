@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package ApiProtos.Members.Login;
+
+message Login {
+   int32 usId = 1; // usid
+   string nickname = 2; // 會員暱稱
+   string profilePhoto = 3; // 會員大頭貼
+   int32 level = 4; // 會員等級
+   string score = 5; // 會員積分
+   string amount = 6; // 會員金幣
+   string mobile = 7; // 會員電話
+   string email = 8; // 會員mail
+   int32 notifications = 9; // 會員消息通知數量
+   int32 missions = 10; // 是否有任務
+   int32 weixin = 11; // 是否綁定微信
+   int32 qq = 12; // 是否綁定QQ
+   int32 weibo = 13; // 是否綁定微薄
+   int32 type = 14; // 會員登入種類
+   string token = 15; // 登入token
+   string ip = 16; // ip位置
+   string countryCode = 17; // 國家代碼
+}
+

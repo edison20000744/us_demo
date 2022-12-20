@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+import "protobuf/protos/socket/Socket.proto";
+package socketProtos.SubscribeInfo;
+
+message SubscribeResult  {
+    socketProtos.command.Command command = 1;
+    string identifier = 2; // 識別碼 client提供
+    bool type = 3; // 類別 ture訂閱 false取消訂閱
+    bool result = 4; // 訂閱結果
+    string message = 5; // 錯誤訊息
+}
+
+message SubscribeMatchDetail {
+    socketProtos.command.Command command = 1;
+    int32 matchId = 2; // 賽事id
+    bool type = 3; // 類別 ture訂閱 false取消訂閱
+    string identifier = 4; // 識別碼 client提供
+}
+
+message SubscribeTgRecentMatches {
+    socketProtos.command.Command command = 1;
+    bool type = 3; // 類別 ture訂閱 false取消訂閱
+    string identifier = 4; // 識別碼 client提供
+}
+
+message SubscribeTgOdds {
+    socketProtos.command.Command command = 1;
+    int32 matchId = 2; // 賽事id
+    bool type = 3; // 類別 ture訂閱 false取消訂閱
+    string identifier = 4; // 識別碼 client提供
+}
+

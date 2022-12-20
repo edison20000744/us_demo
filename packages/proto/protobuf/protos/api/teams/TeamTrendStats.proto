@@ -1,0 +1,114 @@
+syntax = "proto3";
+
+package ApiProtos.Teams.TrendStats;
+
+message TeamsTrendStats {
+
+    message WinlostItem {
+        uint32 teamId = 1;//球隊id
+        uint32 total = 2;//場次
+        uint32 win = 3;//勝
+        uint32 lost = 4;//負
+        uint32 tie = 5;//平
+        uint32 diff = 6;//淨勝差
+        string winRate = 7;//勝率
+        string lostRate = 8;//負率
+        string tieRate = 9;//平率
+        string item = 10;//統計項目 total:總計 home:主場 away:客場
+    }
+
+    message BigSmallItem {
+        uint32 teamId = 1;//球隊id
+        uint32 total = 2;//場次
+        uint32 big = 3;//大
+        uint32 small = 4;//小
+        uint32 tie = 5;//平
+        uint32 diff = 6;//大淨勝
+        string bigRate = 7;//大率
+        string smallRate = 8;//小率
+        string tieRate = 9;//平率
+        string item = 10;//統計項目 total:總計 home:主場 away:客場
+    }
+
+    message HalfFullItem {
+        uint32 teamId = 1;//球隊id
+        uint32 total = 2;//場次
+        uint32 winwin = 3;//勝勝
+        uint32 wintie = 4;//勝平
+        uint32 winlost = 5;//勝負
+        uint32 tiewin = 6;//平勝
+        uint32 tietie = 7;//平平
+        uint32 tielost = 8;//平負
+        uint32 lostwin = 9;//負勝
+        uint32 losttie = 10;//負平
+        uint32 lostlost = 11;//負負
+        string item = 12;//統計項目 total:總計 home:主場 away:客場
+    }
+    
+
+    message GoalOddeven {
+        uint32 teamId = 1;//球隊id
+        uint32 total = 2;//場次
+        uint32 one = 3;//1球
+        uint32 two = 4;//2球
+        uint32 three = 5;//3球
+        uint32 four = 6;//4球
+        uint32 five = 7;//5球
+        uint32 six = 8;//6球
+        uint32 sevenOrMore = 9;//7球+
+        uint32 oddCount = 10;//單
+        uint32 evenCount = 11;//雙
+        string oddRate = 12;//單率
+        string evenRate = 13;//雙率
+    }
+
+    message GoalHomeAway {
+        uint32 teamId = 1;//球隊id
+        uint32 total = 2;//場次
+        uint32 goalGames = 3;//進球場次
+        uint32 goalTotal = 4;//總進球
+        uint32 goalHome = 5;//主場進球
+        uint32 goalAway = 6;//客場進球
+        string goalAvg = 7;//場均進球
+    }
+
+    message Cornerfoul {
+        uint32 teamId = 1;//球隊id
+        uint32 total = 2;//場次
+        uint32 corner = 3;//角球
+        string avgCorner = 4;//場均角球
+        uint32 foul = 5;//罰牌
+        string avgFoul = 6;//場均罰牌
+    }
+
+    message Team {
+        uint32 teamId = 1;//球隊id
+        string name = 2;//隊伍名稱
+        string shortName = 3;//隊伍縮寫名稱
+        string logo = 4;//隊伍logo
+    }
+
+    message SelectionInfo {
+        string selectionName = 1; // 整場選項名稱 (0-0 0-1 0-2 0-3 1-0 1-1 1-2 1-3 2-0 2-1 2-2 2-3 3-0 3-1 3-2 3-3 homeFourOrMore awayFourOrMore) 半場選項名稱 0-0 0-1 0-2 1-0 1-1 1-2 2-0 2-1 2-2 other
+        int32 appearCnt = 2; // 出現次數
+        int32 notAppearCnt = 3; // 未出現次數
+        string appearRate = 4; // 出現比率
+        string notAppearRate = 5; // 未出現比率
+    }
+    
+    message Statistics {
+        uint32 total =1;//場次
+        repeated SelectionInfo selection =2;//比分統計項目
+    }
+
+    Statistics statisticsData = 1; // 比分統計資訊
+    Statistics statisticsHalfScoreData = 2; // 半場比分統計
+    repeated WinlostItem winLostTables = 3;//勝負平
+    repeated WinlostItem asiaTables = 4;//讓球
+    repeated BigSmallItem goalBigSmall = 5;//總進球
+    repeated HalfFullItem halfFull = 6;//半全場
+    repeated GoalOddeven goalOddEven = 7;//單雙
+    repeated GoalHomeAway goalHomeAway = 8;//進球走勢
+    repeated Cornerfoul cornerFoul = 9;//角球罰牌
+    repeated Team teams = 10;//球隊列表
+}

@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package ApiProtos.Other.DataList;
+
+message Info {
+    int32 id = 1; //id
+    string name = 2; //名稱
+    string logo = 3; //LOGO
+    int32 count = 4; //數量
+}
+
+message AreaList {
+    message PopularCountry {
+        int32 id = 1; //國家id
+        string name = 2; //名稱
+        string logo = 3; //國家LOGO
+        int32 areaId = 4; //地區ID
+    }
+
+    message PopularLeague {
+        int32 id = 1; //聯盟id
+        string name = 2; //聯盟名稱
+        string logo = 3; //聯盟LOGO
+        string areaName = 4; //區域名稱
+        string countryName = 5; //國家名稱
+    }
+
+    repeated Info areas = 1; //區域列表
+    repeated PopularCountry popularCountries = 2; //熱門國家
+    repeated PopularLeague popularLeagues = 3; //熱門聯盟
+}
+
+message CountryList {
+    repeated Info payload = 1; // 國家列表 api payload(陣列)
+}
+
+message LeagueList {
+    repeated Info payload = 1; // 聯盟列表 api payload(陣列)
+}
+
+message TeamList {
+    repeated Info payload = 1; // 球隊列表 api payload(陣列)
+}
+
+message PlayerList {
+    repeated Info payload = 1; // 球員列表 api payload(陣列)
+}
+
+
+message AreaCountries {
+
+    message AreaCountryData {
+        int32 areaId = 1; //地區id 
+        string areaName = 2; //地區名稱
+        string areaLogo = 3; //地區LOGO
+        int32 countryCount = 4; //該地區國家數量
+        repeated Info countries = 5; // 地區國家列表 
+    }
+
+    repeated AreaCountryData payload = 1; //地區國家所有列表 api payload(陣列)
+}

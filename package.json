@@ -1,0 +1,36 @@
+{
+  "name": "us",
+  "version": "0.9.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@volar-plugins/prettyhtml": "latest"
+  },
+  "scripts": {
+    "setup": "yarn",
+    "web-dev": "cd packages/web && vite",
+    "web-dev-mobile": "cd packages/web-mobile && vite",
+    "web-stg": "cd packages/web && vite --mode staging",
+    "web-stg-mobile": "cd packages/web-mobile && vite --mode staging",
+    "web-dev-tg": "cd packages/web-tg && vite --mode tg-development",
+    "web-stg-tg": "cd packages/web-tg && vite --mode tg-staging",
+    "web-dev-app": "cd packages/web-static-page-for-app && vite",
+    "web-build-dev": "cd packages/web && vite build --mode development",
+    "web-build-stg": "cd packages/web && vite build --mode staging",
+    "web-build-prod": "cd packages/web && vite build --mode prod",
+    "web-build-tg-dev": "cd packages/web-tg && vite build --mode tg-staging",
+    "web-build-tg-stg": "cd packages/web-tg && vite build --mode tg-staging",
+    "web-build-tg-prod": "cd packages/web-tg && vite build --mode tg-prod",
+    "web-build-app-dev": "cd packages/web-static-page-for-app && vite build --mode development",
+    "web-build-app-stg": "cd packages/web-static-page-for-app && vite build --mode staging",
+    "web-build-app-prod": "cd packages/web-static-page-for-app && vite build --mode prod",
+    "protoc2ts": "cd packages/proto && yarn run socket &&  yarn run chat && yarn run api",
+    "locales-update": "cd packages/locales && yarn run update"
+  },
+  "resolutions": {
+    "@vue/runtime-core": "3.2.33",
+    "@vue/runtime-dom": "3.2.33"
+  }
+}

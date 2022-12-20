@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package ApiProtos.Matches.MatchList;
+
+import "protobuf/protos/socket/MatchInfo.proto";
+
+message MatchList {
+   repeated socketProtos.MatchInfo.Area areas = 1; //地區列表
+   repeated socketProtos.MatchInfo.MatchData matches = 2; //賽事列表
+}
+

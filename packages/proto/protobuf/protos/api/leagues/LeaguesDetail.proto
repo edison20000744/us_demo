@@ -1,0 +1,182 @@
+syntax = "proto3";
+
+package ApiProtos.Leagues.LeaguesDetail;
+
+message LeaguesDetail {
+
+    message Season {
+        int32 id = 1; // 賽季id
+        string name = 2; // 賽季名稱
+    }
+
+    message Stage {
+        int32 id = 1; // 階段id
+        string name = 2; // 階段名稱
+        int32 mode = 3; // 階段模式
+        int32 groupCount = 4; // 總組數
+        int32 roundCount = 5; // 總倫次
+        int32 order = 6; // 排序
+    }
+
+    message Statistics {
+        int32 leagueLevel = 1;  // 聯盟等級
+        int32 conventionalRound = 2;  // 常規輪次
+        int32 participateTeam = 3; // 參與隊伍數量
+        int32 participatePlayer = 4; // 參與球員數量
+        string marketValue = 5; // 市值
+    }
+
+    message RelationLeague {
+        int32 id = 1; // 聯盟ID
+        int32 type = 2; // 種類
+        string name = 3; // 名稱
+        string logo = 4; // LOGO
+    }
+
+    message Info {
+        Statistics statistics = 1; // 統計資訊
+        repeated int32 upgradeTeams = 2; // 生斑馬
+        repeated int32 downgradeTeams = 3; // 降斑馬
+        repeated RelationLeague relationLeagues = 4; // 關聯聯盟
+    }
+
+    message MatchData {
+        int32 id = 1; // 賽事ID
+        int32 homeId = 2; // 主隊ID
+        int32 awayId = 3; // 客隊ID
+        int32 openDate = 4; // 開賽時間
+        int32 startTime = 5; // 開球時間
+        int32 homeScore = 6; // 主隊比分
+        int32 awayScore = 7; // 客隊比分
+        int32 homeHalfScore = 8; // 主隊半場比分
+        int32 awayHalfScore = 9; // 客隊半場比分
+        int32 homeCorner = 10; // 主隊角球數量
+        int32 awayCorner = 11; // 客隊角球數量
+        int32 homePenalty = 12; // 主隊點球比分
+        int32 awayPenalty = 13; // 客隊點球比分
+        int32 homeExtend = 14; // 主隊延長賽比分
+        int32 awayExtend = 15; // 客隊延長賽比分
+        int32 status = 16; // 賽事狀態
+        string note = 17; // 備註
+        int32 neutral = 18; // 是否為中立場
+    }
+
+    message Row {
+        string name = 1; // 名稱
+        string homeScore = 2; // 回合制賽事主隊加總比分，非回合制為空字串''
+        string awayScore = 3; // 回合制賽事客隊加總比分，非回合制為空字串''
+        string homeName = 4; // 回合制賽事主隊加總比分，非回合制為空字串''
+        string awayName = 5; // 回合制賽事客隊加總比分，非回合制為空字串''
+        repeated MatchData data = 6; // 賽事資訊
+    }
+
+    message Match {
+        int32 stageId = 1; // 階段ID
+        string type = 2; // 總類
+        int32 isRoundBattle  = 3; // 是否為回事制 0否 1是
+        repeated Row rows = 4; // 賽事資訊
+    }
+
+    message LineupDetail {
+        int32 id = 1; // 球員ID
+        string name = 2; // 球員名稱
+        string logo = 3; // 球員LOGO
+        string rating = 4; // 球員評分
+        int32 locationX = 5; // 球員座標X
+        int32 locationY = 6; // 球員座標Y
+        string position = 7; // 球員位置
+        int32 teamId = 8; // 球隊ID
+    }
+
+    message BestLineup {
+        int32 id = 1; // 最佳陣容ID
+        string name = 2; // 最佳陣容名稱
+        repeated LineupDetail detail = 3; // 最佳陣容詳情
+    }
+
+    message Team {
+        int32 id = 1; // 球隊ID
+        string name = 2; // 球隊名稱
+        string logo = 3; // 球隊LOGO
+    }
+
+    message Promotion {
+        int32 id = 1; // 備註ID
+        string name = 2; // 備註名稱
+        string color = 3; // 備註顏色
+    }
+
+    message TableRows {
+        int32 id = 1; // 積分榜ID
+        int32 promotionId = 2; // 備註ID
+        int32 points = 3; // 積分點數
+        int32 position = 4; // 積分排名
+        int32 total = 5; // 總場數
+        int32 won = 6; // 勝場數
+        int32 draw = 7; // 平場數
+        int32 loss = 8; // 敗場數
+        int32 goals = 9; // 進球數
+        int32 goalsAgainst = 10; // 失球數
+        int32 goalDiff = 11; // 進球差
+    }
+
+    message TableData {
+        string group = 1; // 分組名稱
+        repeated TableRows rows = 2; // 積分資訊
+    }
+
+    message TableRank {
+        int32 stageId = 1; // 階段ID
+        repeated TableData data = 2;  // 積分資訊
+    }
+
+    message Table {
+        repeated Promotion promotions = 1; //備註資訊
+        repeated TableRank rank = 2; // 積分資訊
+        string rule = 3; //賽季積分規則
+    }
+
+    message ShooterRank {
+        int32 playerId = 1; //球員ID
+        int32 teamId = 2; // 球隊ID
+        int32 position = 3; // 排名
+        int32 total = 4; // 進球數
+    }
+
+    message Player {
+        int32 id = 1; //球員ID
+        string name = 2; //球員ID
+        string logo = 3; //球員LOGO
+        int32 teamId = 4; //球隊ID
+    }
+
+    message MarketValueRank {
+        int32 playerId = 1; //球員ID
+        int32 position = 2; //排名
+        int32 total = 3; //市值(int)
+        string marketValue = 4; //市值(已轉換)
+        int32 teamId = 5; //球隊ID
+    }
+
+    int32 leagueId = 1; //聯盟ID
+    int32 leagueType = 2; //聯盟種類
+    string leagueName = 3; //聯盟名稱
+    string leagueLogo = 4; //聯盟LOGO
+    int32 areaId = 5; //區域ID
+    string areaName = 6; //區域名稱
+    int32 countryId = 7; //國家ID
+    string countryName = 8; //國家名稱
+    int32 curSeasonId = 9; //當前賽季ID
+    int32 curStageId = 10; //當前階段ID
+    int32 curRound = 11;  //當前輪次
+    repeated Season seasons = 12; //賽季資訊
+    repeated Stage stages = 13; //階段資訊
+    Info info = 14; //基本資訊
+    repeated Match matches = 15; //賽事資訊
+    repeated BestLineup bestLineup = 16; //陣容資訊
+    repeated Team teams = 17; //隊伍資訊
+    Table tables = 18;//積分資訊
+    repeated ShooterRank shooterRank = 19;//射手榜
+    repeated Player players = 20;//球員資訊
+    repeated MarketValueRank marketValueRank = 21;//市值榜
+}

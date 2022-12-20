@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package ApiProtos.Leagues.LeaguesOccurrenceRate;
+
+message OccurrenceRate {
+
+    message SelectionInfo {
+        string selectionName = 1; // 整場選項名稱 (0-0 0-1 0-2 0-3 1-0 1-1 1-2 1-3 2-0 2-1 2-2 2-3 3-0 3-1 3-2 3-3 homeFourOrMore awayFourOrMore) 半場選項名稱 0-0 0-1 0-2 1-0 1-1 1-2 2-0 2-1 2-2 other
+        int32 appearCnt = 2; // 出現次數
+        int32 notAppearCnt = 3; // 未出現次數
+        string appearRate = 4; // 出現比率
+        string notAppearRate = 5; // 未出現比率
+        int32 appearRank = 6; // 出現排名
+        int32 notAppearRank = 7; // 未出現排名
+    }
+
+    repeated SelectionInfo statisticsData = 1; // 比分統計資訊
+    repeated SelectionInfo statisticsHalfScoreData = 2; // 半場比分統計
+    int32 totalCount = 3; //總場數
+}

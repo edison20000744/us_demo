@@ -1,0 +1,23 @@
+
+syntax = "proto3";
+
+package ApiProtos.Matches.MatchGoalDistribution;
+
+message MatchGoalDistribution {
+
+     message Statistics {
+        int32 number = 1; // 進球個數
+        int32 percentage = 2; // 百分比
+        int32 startTime = 3; // 開始時間（分鐘數）
+        int32 endTime = 4; // 結束時間（分鐘數）
+    }
+
+    message Distribution {
+        repeated Statistics home = 1; // 主場統計
+        repeated Statistics away = 2; // 客場統計
+        repeated Statistics all = 3; // 全部統計
+    }
+
+    Distribution home = 1; // 主隊進球分布
+    Distribution away = 2; // 客隊進球分布
+}

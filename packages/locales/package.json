@@ -1,0 +1,23 @@
+{
+  "name": "@us/locales",
+  "version": "0.0.0",
+  "main": "out/index.js",
+  "scripts": {
+    "parse-csv": "ts-node ./scripts/parseCsv.ts",
+    "update-csv": "ts-node ./scripts/sheet.ts",
+    "update": "npm run update-csv && npm run parse-csv"
+  },
+  "peerDependencies": {
+    "@vue/reactivity": "latest"
+  },
+  "devDependencies": {
+    "@types/glob": "latest",
+    "@types/google-spreadsheet": "latest",
+    "@types/node": "latest",
+    "csv-string": "latest",
+    "glob": "latest",
+    "google-spreadsheet": "latest",
+    "neat-csv": "6.0.1",
+    "ts-node": "latest"
+  }
+}

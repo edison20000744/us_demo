@@ -1,0 +1,12 @@
+{
+    "name": "@us/ws",
+    "version": "0.0.0",
+    "main": "out/index.js",
+    "devDependencies": {
+        "@types/crypto-js": "latest"
+    },
+    "dependencies": {
+        "crypto-js": "latest",
+        "mitt": "latest"
+    }
+}

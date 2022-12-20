@@ -1,0 +1,307 @@
+syntax = "proto3";
+
+import "protobuf/protos/socket/Socket.proto";
+
+package socketProtos.MatchInfo;
+
+message MatchUpdate  {
+    socketProtos.command.Command command = 1;
+    int32 matchId = 2; // 賽事id
+    sint32 status = 3; // 賽事狀態
+    int32 startTime = 4; // 實際開球時間(timestamp)
+    int32 homeScore = 5; // 主隊全場得分
+    int32 homeHalfScore = 6; // 主隊半場得分
+    int32 homeRedCard = 7; // 主隊紅牌數量
+    int32 homeYellowCard = 8; // 主隊黃牌數量
+    int32 homeCorner = 9; // 主隊角球數量
+    int32 homeExtend = 10; // 主隊延長賽比分(已包含常規比分)
+    int32 homePenalty = 11; // 主隊點球大戰比分
+    int32 awayScore = 12; // 客隊全場得分
+    int32 awayHalfScore = 13; // 客隊半場得分
+    int32 awayRedCard = 14; // 客隊紅牌數量
+    int32 awayYellowCard = 15; // 客隊黃牌數量
+    int32 awayCorner = 16; // 客隊角球數量
+    int32 awayExtend = 17; // 客隊延長賽比分(已包含常規比分)
+    int32 awayPenalty = 18; // 客隊點球大戰比分
+    string animation = 19; // 動畫連結
+    repeated LiveStreamProvider liveStreamings = 20; // 視頻資訊
+}
+
+message LiveStreamProvider {
+    string provider = 1; // 廠商
+    repeated LiveStreamSource source = 2; // 視頻來源
+}
+
+message LiveStreamSource{
+    string name = 2; // 視頻名稱
+    string rtmp = 3; // rtmp
+    string hls = 4; // hls
+}
+
+message GoalNotify {
+    socketProtos.command.Command command = 1;
+    int32 matchId = 2; // 賽事id
+    sint32 status = 3; // 賽事狀態
+    int32 type = 4; // 通知事件類型 1:進球 2:紅牌 3:黃牌
+    int32 runtime = 5; // 現在比賽進行的時間
+    int32 teamEvent = 6; // 通知事件方 1:主隊 2客隊
+    string homeName = 7; // 主隊名稱簡中
+    int32 homeScore = 10;  // 主隊全場得分
+    int32 homeRedCard = 11; // 主隊紅牌數量
+    int32 homeYellowCard = 12; // 主隊黃牌數量
+    int32 homeCorner = 13; // 主隊角球數量
+    string awayName = 14; // 客隊名稱簡中
+    int32 awayScore = 17; // 客隊全場得分
+    int32 awayRedCard = 18; // 客隊紅牌數量
+    int32 awayYellowCard = 19; // 客隊黃牌數量
+    int32 awayCorner = 20; // 客隊角球數量
+}
+
+message DeleteMatches {
+    socketProtos.command.Command command = 1;
+    repeated int32 matchIds = 2; // 賽事id
+}
+
+message  OpenDateChange{
+    socketProtos.command.Command command = 1;
+    repeated ChangeItem changeList = 2; // 變動列表
+}
+
+message ChangeItem{
+    int32 matchId = 1; // 賽事id
+    int32 initialOpenDate = 2; // 原本時間
+    int32 changeOpenDate = 3; // 變動時間
+}
+
+message MatchStats{
+    int32 type = 1; // 技術統計分類;詳見技術統計類別碼
+    int32 home = 2; // 主隊分數
+    int32 away = 3; // 客隊分數
+}
+
+message MatchTlive{
+    string data = 1; // 文字直播內容
+    int32 position = 2; // 事件發生方,0-中立 1,主隊 2,客隊
+    int32 type = 3; // 狀態分類//类型，详见技术统计類別碼
+    string time = 4; // 進行時間
+}
+
+message MatchIncident {
+    int32 halfTime = 1; // 半場時間刻度
+    int32 overTime = 2; // 全場時間刻度
+    int32 extendTime = 3; // 加時時間刻度
+    repeated IncidentData data = 4; // 事件資料
+}
+
+message  IncidentData{
+    int32 type = 1; // 類型
+    int32 position = 2; // 事件發生方，0-中立1，主隊2，客隊
+    string time = 3; // 時間（分鐘）
+    int32 scale = 4; // 時間刻度
+    string playerName = 5; // 事件人員名稱(除了簡中，其它語言為空字串)    
+}
+
+message MatchDetail{
+    socketProtos.command.Command command = 1;
+    repeated MatchStats matchStats = 2; // 賽事統計資訊
+    repeated MatchTlive matchTlive = 3; // 賽事文字直播
+    MatchIncident matchIncident = 4; // 賽事重要事件
+}
+
+message MatchPlayer{
+    int32 playerId = 1; // 球員id
+    repeated MatchPlayerIncident matchPlayerIncidents = 2; // 賽事球員事件
+}
+
+message MatchPlayerIncident{
+    int32 type = 1; // 類型詳見狀態碼(足球技術統計)
+    string time = 2; // 時間（分鐘）
+    int32 assist1Id = 3; // 進球時，助攻球員1 id，-1則不須理會
+    int32 assist2Id = 4; // 進球時，助攻球員2 id，-1則不須理會
+    int32 inPlayerId = 5; // 換人時，換上球員id，-1則不須理會
+    int32 outPlayerId = 6; // 換人時，換下球員id，-1則不須理會
+    int32 homeScore = 7; //主隊比分
+    int32 awayScore = 8; //客隊比分
+}
+
+message MatchLineup{
+    socketProtos.command.Command command = 1;
+    repeated MatchPlayer homePlayers = 2; // 主隊球員
+    repeated MatchPlayer awayPlayers = 3; // 客隊球員
+}
+
+message NewMatches {
+    socketProtos.command.Command command = 1;
+    repeated Area areas = 2; // 地區列表
+    repeated MatchData matches = 3; // 賽事列表
+}
+
+message Area {
+    int32 id = 1; // 地區id
+    string name = 2; // 地區名稱
+    repeated Country countries = 3; // 國家列表
+}
+
+message Country {
+    int32 id = 1; // 國家id
+    string name = 2; // 國家名稱
+    repeated League leagues = 3; // 聯盟列表
+
+}
+
+message League{
+    int32 id = 1; // 聯盟id
+    string name = 2; // 聯盟名稱(簡中)
+}
+
+message MatchData{
+    int32 matchId = 1; // 賽事id
+    int32 status = 2; // 賽事狀態
+    int32 openDate = 3; // 開賽時間
+    int32 startTime = 4; // 開球時間
+    int32 areaId = 5; // 地區id
+    int32 countryId = 6; // 國家id
+    int32 leagueId = 7; // 聯盟id
+    string leagueName = 8; // 聯盟名稱
+    string leagueLogo = 9; // 聯盟logo
+    int32 homeId = 10; // 主隊id
+    int32 awayId = 11; // 客隊id
+    string homeName = 12; // 主隊名稱
+    string awayName = 13; // 客隊名稱
+    string homeLogo = 14; // 主隊logo
+    string awayLogo = 15; // 客隊logo
+    int32 homeScore = 16; // 主隊全場比分
+    int32 awayScore = 17; // 客隊全場比分
+    int32 homeHalfScore = 18; // 主隊半場比分
+    int32 awayHalfScore = 19; // 客隊半場比分
+    int32 homeRedCard = 20; // 主隊紅牌數量
+    int32 awayRedCard = 21; // 客隊紅牌數量
+    int32 homeYellowCard = 22; // 主隊黃牌數量
+    int32 awayYellowCard = 23; // 客隊黃牌數量
+    int32 homeCorner = 24; // 主隊角球數量
+    int32 awayCorner = 25; // 客隊角球數量
+    string animation = 26; // 動畫連結
+    repeated LiveStreamProvider liveStreamings = 27; // 視頻連結
+    string fullGameTime = 28; // 完場時間
+    int32 neutral = 29; // 是否為中立場 0否 1是
+    int32 round = 30; // 輪次
+    int32 betsCount = 31; // 累計下注次數
+    bool hasStatistics = 32; // 是否有統計項目(scoreStatistics、oddStatistics、tgOdds、odds)
+    repeated ScoreStatistics scoreStatistics = 33; // 選項出現率統計
+    OddStatistics oddStatistics = 34; // 指數統計
+    repeated TgOdd tgOdds = 35; // TG指數資訊
+    OddIndexs odds = 36; // 一般指數(亞、歐、大小球)資訊
+    int32 views = 37; // 賽事詳情觀看次數
+}
+
+message ScoreStatistics {
+    string selectionName = 1; // 選項
+    string homeAppearRate = 2; // 出現率(主隊)
+    int32 homeContinuedCount = 3; // 連續出現次數(主隊)
+    string awayAppearRate = 4; // 出現率(客隊)
+    int32 awayContinuedCount = 5; // 連續出現次數(客隊)
+}
+
+message OddStatistics {
+    OddStatisticsDetail win = 1; // 贏
+    OddStatisticsDetail lost = 2; // 輸
+    OddStatisticsDetail peace = 3; // 和
+    OddStatisticsDetail asiaWin = 4; // 亞盤連續贏盤
+    OddStatisticsDetail asiaLost = 5; // 亞盤連續輸盤
+    OddStatisticsDetail asiaPeace = 6; // 亞盤連續平局
+    OddStatisticsDetail overBall = 7; // 連續大球
+    OddStatisticsDetail underBall = 8; // 連續小球
+    OddStatisticsDetail peaceBall = 9; // 連續走(平局)
+}
+
+message OddStatisticsDetail {
+    int32 homeAppearCnt = 1; // 出現次數(主隊)
+    string homeAppearRate = 2; // 出現機率(主隊)
+    int32 homeContinuedCount = 3; // 連續出現次數(主隊)
+    int32 awayAppearCnt = 4; // 出現次數(客隊)
+    string awayAppearRate = 5; // 出現機率(客隊)
+    int32 awayContinuedCount = 6; // 連續出現次數(客隊)
+}
+
+message TgOdd {
+    string selectionName = 1; // 選項名稱
+    string transaction = 2; // 可交易量
+    string profit = 3; // 獲利率
+    string betMoney = 4; // 累計下注金額
+    int32 isPopular = 5; // 是否熱銷 0否 1是
+    int32 isSoldOut = 6; // 是否完售 0否 1是
+}
+
+message OddIndexs {
+    OddIndexItem asia = 1; // 亞盤
+    OddIndexItem eu = 2; // 歐盤
+    OddIndexItem bs = 3; // 大小球
+    OddIndexItem cr = 4; // 角球
+}
+
+message OddIndexItem{
+    int32 companyID = 1; // 指數公司id
+    string companyName = 2; // 指數公司名稱
+    OddIndexDetail first = 3; // 初盤
+    OddIndexDetail latest = 4; // 即時盤
+    OddIndexDetail live = 5; // 滾球盤
+    int32 closed = 6; // 是否封盤 0否 1是
+}
+
+message OddIndexDetail{
+    string home = 1; // 主賠率
+    string handicap = 2; // 和賠率
+    string away = 3; // 客賠率
+}
+
+message PopularMatches {
+
+    message PopularIndex {
+        string home = 1; // 主胜
+        string handicap = 2; // 盤口
+        string away = 3; // 客胜
+        int32 closed = 4; // 是否封盤
+    }
+    
+    message PopularOdds {
+        PopularIndex asia = 1; // 亞盤
+        PopularIndex eu = 2; // 歐盤
+        PopularIndex bs = 3; // 大小球
+        PopularIndex cr = 4; // 角球
+    }
+    
+    message PopularMatch{
+        int32 matchId = 1; // 賽事id
+        int32 status = 2; // 賽事狀態
+        int32 openDate = 3; // 開賽時間
+        int32 startTime = 4; // 開球時間
+        int32 leagueId = 5; // 聯盟id
+        string leagueName = 6; // 聯盟名稱
+        string leagueLogo = 7; // 聯盟logo
+        int32 homeId = 8; // 主隊id
+        int32 awayId = 9; // 客隊id
+        string homeName = 10; // 主隊名稱
+        string awayName = 11; // 客隊名稱
+        string homeLogo = 12; // 主隊logo
+        string awayLogo = 13; // 客隊logo
+        int32 homeScore = 14; // 主隊全場比分
+        int32 awayScore = 15; // 客隊全場比分
+        int32 homeHalfScore = 16; // 主隊半場比分
+        int32 awayHalfScore = 17; // 客隊半場比分
+        int32 homeRedCard = 18; // 主隊紅牌數量
+        int32 awayRedCard = 19; // 客隊紅牌數量
+        int32 homeYellowCard = 20; // 主隊黃牌數量
+        int32 awayYellowCard = 21; // 客隊黃牌數量
+        int32 homeCorner = 22; // 主隊角球數量
+        int32 awayCorner = 23; // 客隊角球數量
+        string animation = 24; // 動畫連結
+        repeated LiveStreamProvider liveStreamings = 25; // 視頻連結
+        int32 views = 26; // 賽事詳情觀看次數
+        int32 neutral = 27; // 是否為中立場
+        PopularOdds odds = 28; // 一般指數(亞、歐、大小球)資訊
+        repeated TgOdd tgOdds = 29; // TG指數資訊
+    }
+        
+    socketProtos.command.Command command = 1;
+    repeated PopularMatch matches = 2; // 賽事列表
+}

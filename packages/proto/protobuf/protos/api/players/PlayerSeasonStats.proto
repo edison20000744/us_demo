@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package ApiProtos.Players.PlayerSeasonStats;
+
+message PlayerSeasonStats {
+
+    message SeasonStats {
+        string leagueName = 1;
+        repeated string columns = 2;
+        repeated string rows = 3;
+    }
+
+    repeated SeasonStats payload = 1; //球員統計列表
+}

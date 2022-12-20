@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+import "protobuf/protos/socket/Socket.proto";
+package socketProtos.TgMatchInfo;
+
+message TgMatchUpdate{
+    socketProtos.command.Command command = 1;
+    repeated TgMatchInfo data = 2;
+}
+
+message TgRecentMatches{
+    socketProtos.command.Command command = 1;
+    repeated TgMatchDetail data = 2;
+}
+
+message TgMatchInfo {
+    int32 matchId = 1; // 賽事id
+    int32 tgStatus = 2; // TG賽事是否開啟 0未開啟 1開啟
+    int32 openDate = 3; // 開賽時間(timestamp)
+    int32 betsCount = 4; // 總下注量
+    repeated BetDetail betDetail = 5;
+}
+
+
+message TgOddInfo {
+    socketProtos.command.Command command = 1;
+    int32 matchId = 2; // 賽事id
+    TgOddMarket correctScore = 3;//波胆
+    TgOddMarket halfTimeScore = 4;//上半场波胆
+    TgOddMarket totalGoals = 5;//总得分
+}
+
+
+message TgMatchDetail {
+    int32 matchId = 1; // 賽事id
+    int32 status = 2; // 賽事狀態
+    int32 tgStatus = 3; // TG賽事是否開啟 0未開啟 1開啟
+    int32 homeId = 4; // 主隊ID
+    int32 awayId = 5; // 客隊ID
+    string home = 6; // 主隊名稱
+    string away = 7; // 客隊名稱
+    string homeLogo = 8; // 主隊LOGO
+    string awayLogo = 9; // 客隊LOGO
+    int32 leagueId = 10; // 聯盟ID
+    string league = 11; // 聯盟名稱
+    string leagueShortNameEn = 12; // 聯盟簡稱
+    string leagueLogo = 13; // 聯盟LOGO
+    int32 openDate = 14; // 開賽時間(timestamp)
+    int32 betsCount = 15; // 總下注量
+    int32 views = 16; // 人氣數
+    int32 neutral = 17; // 是否為中立場
+    string maxScore = 18; // 最大出現率名稱
+    string maxValue = 19; // 最大出現率%
+    string minScore = 20; // 最小出現率名稱
+    string minValue = 21; // 最小出現率%
+    bool recentFourHours = 22; //是否為4小內賽事
+    bool recentEightHours = 23; //是否為8小內賽事
+    bool recentTwelveHours = 24; //是否為12小內賽事
+}
+
+message BetDetail {
+    int32 marketType = 1; // 1波膽 2半場波膽 3總入球
+    string selectionName = 2; // 選項名稱
+    string transaction = 3; // 可交易量
+    string profit = 4; // 獲利率
+    string betMoney = 5; // 累積金額
+    int32 isPopular = 6; // 是否熱銷
+    int32 isSoldOut = 7; // 是否完售
+}
+
+message TgOddMarket {
+    string name=1;//市場名稱
+    repeated TgOddMarketSelection selections = 2;//市場選項明細
+}
+
+message TgOddMarketSelection {
+    string selectionName = 1; // 選項名稱
+    string odd = 2; // 獲利率
+    string transaction = 3; // 可交易量
+    string betMoney = 4; // 累積金額
+}
